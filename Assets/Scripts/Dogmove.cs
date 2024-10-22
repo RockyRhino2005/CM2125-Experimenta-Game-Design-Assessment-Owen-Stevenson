@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Dog : MonoBehaviour
+public class DogMove : MonoBehaviour
 {
     
     public float min=2f;
