@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class CatMove : MonoBehaviour {
     public string up;
@@ -12,24 +10,38 @@ public class CatMove : MonoBehaviour {
     public string run;
     public string hide;
     public float lastJumped;
-    private bool isGrounded;
+
+    public GameObject cupboard;
     private Rigidbody2D myRigid;
     private bool inFrontCupboard;
-    // private bool hidden; 
+
+    private bool isFacingRight;
+
+    private bool hidden;
 
     // Start is called before the first frame update
     void Start()
     {
         // Get the Rigidbody component.
         myRigid = this.GetComponent<Rigidbody2D>(); 
+
+        isFacingRight = true;
     }
 
     // when the cat is infront of a cupboard this statment
     // becomes true and allows the cat to hide
-    public void OnCollisionEnter2D(Collision2D collision){
-        if (collision.gameObject.tag =="cupboard"){
-            // Debug.log("colided");
+    public void OnTriggerEnter2D(Collider2D collision){
+        if (collision.gameObject == cupboard){
             inFrontCupboard = true;
+            UnityEngine.Debug.Log("infrontcupboard");
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision){
+        if (collision.gameObject == cupboard){
+            inFrontCupboard = false;
+            hidden = false;
+            UnityEngine.Debug.Log("left cupboard");
         }
     }
 
@@ -46,46 +58,54 @@ public class CatMove : MonoBehaviour {
 
         // left
         if (Input.GetKey(left)) {
-            this.transform.Translate(new Vector3(-5f, 0, 0)* Time.deltaTime * 1);
+            this.transform.Translate(new Vector3(5f, 0, 0) * Time.deltaTime * 1);
+            if (isFacingRight == true){
+                this.transform.Rotate(new Vector3(0, 180, 0));
+                isFacingRight = false;
+            }
         }
 
         // right
         if (Input.GetKey(right)) {
             this.transform.Translate(new Vector3(5f, 0, 0)* Time.deltaTime * 1);
+            if (isFacingRight == false){
+                this.transform.Rotate(new Vector3(0, 180, 0));
+                isFacingRight = true;
+            }
         }
 
         // run right
         if (Input.GetKey(run) && Input.GetKey(right)) {
             this.transform.Translate(new Vector3(15f, 0, 0)* Time.deltaTime * 1);
+            if (isFacingRight == false){
+                this.transform.Rotate(new Vector3(0, 180, 0));
+                isFacingRight = true;
+            }
         }
 
         // run left
         if (Input.GetKey(run) && Input.GetKey(left)) {
-            this.transform.Translate(new Vector3(-15f, 0, 0)* Time.deltaTime * 1);
-        }
-
-        // // hide
-        // // testing if h is working
-        // if (input.GetKey(hide)){
-        //     Debug.log("h pressed");
-        // }
-
-        // // testing if statment
-        // if (inFrontCupboard==true){
-        //     Debug.log("its true");
-        // }
-
-        if (Input.GetKey(hide) && inFrontCupboard==true){
-            // Debug.log("its true");
-            this.transform.Translate(new Vector3(-100f, -100f, -100f)* Time.deltaTime * 1);
-            // hidden = true;
-            while(Input.GetKey(hide)==false){
-                // hidden = false;
-                inFrontCupboard = false;
-                this.transform.Translate(new Vector3(-10f, 10f, 10f)* Time.deltaTime * 1);
+            this.transform.Translate(new Vector3(15f, 0, 0)* Time.deltaTime * 1);
+            if (isFacingRight == true){
+                this.transform.Rotate(new Vector3(0, 180, 0));
+                isFacingRight = false;
             }
         }
 
+        // when pressing h and infrot of cupboard the character is hidden
+        //until the player presses
+        if (Input.GetKey(hide) && inFrontCupboard==true){
+            UnityEngine.Debug.Log("key pressed and hidden");
+            hidden = true;
+            }
+
+            if (hidden == true){
+                UnityEngine.Debug.Log("Hidden is true");
+            }
+        }
+
+
+
     }
 
-}
+
