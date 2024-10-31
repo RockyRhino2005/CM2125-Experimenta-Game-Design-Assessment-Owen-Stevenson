@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -25,11 +26,11 @@ public class DayCycle : MonoBehaviour
 
     void FixedUpdate(){
 
-        calcTime();
+        CalcTime();
         DisplayTime();
     }
 
-    public void calcTime(){
+    public void CalcTime(){
 
         seconds += Time.fixedDeltaTime * tick;
 
@@ -37,19 +38,23 @@ public class DayCycle : MonoBehaviour
         if (seconds >= 60){
             seconds = 0;
             minutes += 1;
+            Debug.Log("Minute Passed");
         }
 
         // resets minutes every 60 ingame and updates hours accordingly
         if (seconds >= 60){
             minutes = 0;
             hours += 1;
+            Debug.Log("Hour Passed");
         }
 
         // resets hours every 24 and updates days accordingly
         if (hours >= 24){
             hours = 0;
             days += 1;
+            Debug.Log("Day Passed");
         }
+
 
     }
 
