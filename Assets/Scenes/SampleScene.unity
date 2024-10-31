@@ -10880,7 +10880,7 @@ GameObject:
   - component: {fileID: 1007921335}
   - component: {fileID: 1007921338}
   - component: {fileID: 1007921340}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leia_Right 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13067,7 +13067,7 @@ GameObject:
   - component: {fileID: 1233467762}
   - component: {fileID: 1233467761}
   - component: {fileID: 1233467760}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dog_Left 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16498,7 +16498,7 @@ GameObject:
   - component: {fileID: 1495265893}
   - component: {fileID: 1495265895}
   - component: {fileID: 1495265894}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dog_Left 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

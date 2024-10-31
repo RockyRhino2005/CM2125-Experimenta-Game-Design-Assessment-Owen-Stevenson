@@ -15,8 +15,6 @@ public class DayCycle : MonoBehaviour
     public float minutes;
     public float hours;
     public float days;
-    public float tick;
-
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +30,7 @@ public class DayCycle : MonoBehaviour
 
     public void CalcTime(){
 
-        seconds += Time.fixedDeltaTime * tick;
+        seconds += Time.fixedDeltaTime * 1;
 
         // resets seconds every 60 ingame and updates minutes accordingly
         if (seconds >= 60){

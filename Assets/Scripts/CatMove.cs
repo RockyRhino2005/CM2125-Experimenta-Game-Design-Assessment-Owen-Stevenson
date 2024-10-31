@@ -42,6 +42,7 @@ public class CatMove : MonoBehaviour {
             inFrontCupboard = false;
             hidden = false;
             UnityEngine.Debug.Log("left cupboard");
+            Physics2D.IgnoreLayerCollision(6,7,false);
         }
     }
 
@@ -101,7 +102,9 @@ public class CatMove : MonoBehaviour {
 
             if (hidden == true){
                 UnityEngine.Debug.Log("Hidden is true");
+                Physics2D.IgnoreLayerCollision(6,7,true);
             }
+
         }
 
 
