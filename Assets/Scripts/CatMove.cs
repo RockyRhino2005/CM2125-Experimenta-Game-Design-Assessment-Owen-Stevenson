@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-public class CatMove : MonoBehaviour {
+public class CatMove : MonoBehaviour{
     public string up;
     public string left;
     public string right;
