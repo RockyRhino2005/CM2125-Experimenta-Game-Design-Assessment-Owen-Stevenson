@@ -29,6 +29,7 @@ public class Evolution : MonoBehaviour
     // when the cat is interacts with evo token
     // it destroys and changes the cats evo state
     // as well as its sprite
+    // it now displays a particle system that lasts 3 seconds
     public void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject == Evolve_Token1){
             UnityEngine.Debug.Log("Evo Collided with");

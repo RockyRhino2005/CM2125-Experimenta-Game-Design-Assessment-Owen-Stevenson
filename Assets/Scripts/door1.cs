@@ -13,20 +13,19 @@ public class door1 : MonoBehaviour
 
     void FixedUpdate(){
         if (startDay == true){
-            Debug.Log("daylight cycle");
             CalcTime();
         }
     }
 
     public void CalcTime(){
 
-        seconds += Time.fixedDeltaTime * 1;
+        seconds += Time.fixedDeltaTime * 1200;
 
         // resets seconds every 60 ingame and updates minutes accordingly
         if (seconds >= 60){
             seconds = 0;
             minutes += 1;
-            Debug.Log("Minute Passed");
+            // Debug.Log("Minute Passed");
         }
 
         // resets minutes every 60 ingame and updates hours accordingly
@@ -50,12 +49,14 @@ public class door1 : MonoBehaviour
     {
         
     }
+
     // when player touches the door they are transported to the next section
     public void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject.tag == "door1"){
             UnityEngine.Debug.Log("changed location");
             transform.position=new Vector3(transform.position.x-310,transform.position.y-60, transform.position.z);
             startDay = true;
+            Debug.Log("daylight cycle Started");
         }
 
     }
