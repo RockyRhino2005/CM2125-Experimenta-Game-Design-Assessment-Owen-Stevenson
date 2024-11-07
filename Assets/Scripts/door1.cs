@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// script contains door mechanics
+// script contains day cycle mechanics
+// script contains timer mechanics
 public class door1 : MonoBehaviour
 {
     public float seconds;
     public float minutes;
     public float hours;
     public float days;
+    public float timer = 30;
 
     public float cycle;
 
@@ -23,7 +27,10 @@ public class door1 : MonoBehaviour
 
     public void CalcTime(){
 
+        // in game day seconds
         seconds += Time.fixedDeltaTime * 1500;
+        // timer for the player
+        timer -= Time.fixedDeltaTime * 1;
 
         // resets seconds every 60 ingame and updates minutes accordingly
         if (seconds >= 60){
