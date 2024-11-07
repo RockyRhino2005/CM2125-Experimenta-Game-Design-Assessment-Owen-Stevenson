@@ -6,6 +6,9 @@ TagManager:
   tags:
   - cupboard
   - Evolution
+  - wall
+  - score
+  - door1
   layers:
   - Default
   - TransparentFX
