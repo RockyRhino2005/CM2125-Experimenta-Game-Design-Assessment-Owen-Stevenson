@@ -23,7 +23,7 @@ public class door1 : MonoBehaviour
 
     public void CalcTime(){
 
-        seconds += Time.fixedDeltaTime * 1200;
+        seconds += Time.fixedDeltaTime * 1500;
 
         // resets seconds every 60 ingame and updates minutes accordingly
         if (seconds >= 60){
@@ -40,18 +40,21 @@ public class door1 : MonoBehaviour
         }
 
         // changes background depending on after each 8 hours
-        if(hours == 6){
-            cycle = 1;
-            changeTime();
-        }
-
-        if(hours == 12){
+        if(hours == 5.0){
             cycle = 2;
+            hours += 1;
             changeTime();
         }
 
-        if(hours == 18){
+        if(hours == 11.0){
             cycle = 3;
+            hours += 1;
+            changeTime();
+        }
+
+        if(hours == 17.0){
+            cycle = 1;
+            hours += 1;
             changeTime();
         }
 
@@ -84,15 +87,16 @@ public class door1 : MonoBehaviour
     public void changeTime(){
         // teleport to day
         if (cycle == 2){
-            transform.position=new Vector3(transform.position.x,transform.position.y-2, transform.position.z);
+
+            transform.position=new Vector3(transform.position.x,transform.position.y-40, transform.position.z);
         }
         // teleport to afternoon
         if (cycle == 3){
-            transform.position=new Vector3(transform.position.x,transform.position.y-2, transform.position.z);
+            transform.position=new Vector3(transform.position.x,transform.position.y-40, transform.position.z);
         } 
         // teleport to night
-        else {
-            transform.position=new Vector3(transform.position.x,transform.position.y+4, transform.position.z);
+        else if (cycle == 1) {
+            transform.position=new Vector3(transform.position.x,transform.position.y+100, transform.position.z);
         }
     }
 }
