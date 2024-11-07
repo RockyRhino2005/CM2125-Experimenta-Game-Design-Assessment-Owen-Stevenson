@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CatMove : MonoBehaviour{
+    // movement
     public string up;
     public string left;
     public string right;
@@ -11,6 +10,7 @@ public class CatMove : MonoBehaviour{
     public string hide;
     public float lastJumped;
 
+    // hiding mechanics
     public GameObject cupboard;
     private Rigidbody2D myRigid;
     private bool inFrontCupboard;
@@ -18,13 +18,14 @@ public class CatMove : MonoBehaviour{
     private bool isFacingRight;
 
     private bool hidden;
+    // dead mechanics
+    private bool dead;
 
     // Start is called before the first frame update
     void Start()
     {
         // Get the Rigidbody component.
         myRigid = this.GetComponent<Rigidbody2D>(); 
-
         isFacingRight = true;
     }
 
@@ -33,10 +34,11 @@ public class CatMove : MonoBehaviour{
     public void OnTriggerEnter2D(Collider2D collision){
         if (collision.gameObject == cupboard){
             inFrontCupboard = true;
-            UnityEngine.Debug.Log("infrontcupboard");
+            Debug.Log("infrontcupboard");
         }
     }
 
+    // when cat leaves the cupboard this statement becomes true and stops the player from hiding
     public void OnTriggerExit2D(Collider2D collision){
         if (collision.gameObject == cupboard){
             inFrontCupboard = false;
@@ -45,9 +47,19 @@ public class CatMove : MonoBehaviour{
             Physics2D.IgnoreLayerCollision(6,7,false);
         }
     }
+    
+    private void OnCollisionEnter2D(Collision2D collision){
+
+        if (collision.gameObject.tag =="enemy"){
+            Debug.Log("You Died");
+            dead = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
 
     // Update is called once per frame
     void Update() {
+        // jump
         if (Input.GetKey(up)) {
             // upward force but with if to stop flight
             if (Time.time > lastJumped + 2) 
@@ -99,9 +111,9 @@ public class CatMove : MonoBehaviour{
             UnityEngine.Debug.Log("key pressed and hidden");
             hidden = true;
             }
-
+            // ignores collisions with enemies when hiding
             if (hidden == true){
-                UnityEngine.Debug.Log("Hidden is true");
+                Debug.Log("Hidden is true");
                 Physics2D.IgnoreLayerCollision(6,7,true);
             }
 

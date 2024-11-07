@@ -9,12 +9,16 @@ public class door1 : MonoBehaviour
     public float hours;
     public float days;
 
+    public float cycle;
+
     private bool startDay;
 
     void FixedUpdate(){
         if (startDay == true){
             CalcTime();
         }
+
+
     }
 
     public void CalcTime(){
@@ -29,10 +33,26 @@ public class door1 : MonoBehaviour
         }
 
         // resets minutes every 60 ingame and updates hours accordingly
-        if (seconds >= 60){
+        if (minutes >= 60){
             minutes = 0;
             hours += 1;
             Debug.Log("Hour Passed");
+        }
+
+        // changes background depending on after each 8 hours
+        if(hours == 6){
+            cycle = 1;
+            changeTime();
+        }
+
+        if(hours == 12){
+            cycle = 2;
+            changeTime();
+        }
+
+        if(hours == 18){
+            cycle = 3;
+            changeTime();
         }
 
         // resets hours every 24 and updates days accordingly
@@ -59,5 +79,20 @@ public class door1 : MonoBehaviour
             Debug.Log("daylight cycle Started");
         }
 
+    }
+
+    public void changeTime(){
+        // teleport to day
+        if (cycle == 2){
+            transform.position=new Vector3(transform.position.x,transform.position.y-2, transform.position.z);
+        }
+        // teleport to afternoon
+        if (cycle == 3){
+            transform.position=new Vector3(transform.position.x,transform.position.y-2, transform.position.z);
+        } 
+        // teleport to night
+        else {
+            transform.position=new Vector3(transform.position.x,transform.position.y+4, transform.position.z);
+        }
     }
 }
