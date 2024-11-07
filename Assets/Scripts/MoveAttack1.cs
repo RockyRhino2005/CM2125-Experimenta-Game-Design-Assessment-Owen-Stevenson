@@ -25,7 +25,7 @@ public class MoveBullet : MonoBehaviour {
     // when the attack hits the breakable wall it breaks
     private void OnCollisionEnter2D(Collision2D collision){
 
-        if (collision.gameObject.tag =="wall"){
+        if (collision.gameObject.tag =="wall" || collision.gameObject.tag =="enemy"){
             Instantiate(ps,transform.position, transform.rotation);
             Destroy(collision.gameObject);
         }

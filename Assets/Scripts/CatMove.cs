@@ -18,8 +18,6 @@ public class CatMove : MonoBehaviour{
     private bool isFacingRight;
 
     private bool hidden;
-    // dead mechanics
-    private bool dead;
 
     // Start is called before the first frame update
     void Start()
@@ -47,12 +45,13 @@ public class CatMove : MonoBehaviour{
             Physics2D.IgnoreLayerCollision(6,7,false);
         }
     }
-    
+    // when colliding with an enemy while not hiding
+    // your character "dies" 
+    // the scene then resets
     private void OnCollisionEnter2D(Collision2D collision){
 
         if (collision.gameObject.tag =="enemy"){
             Debug.Log("You Died");
-            dead = true;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
