@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -5,16 +6,16 @@ using UnityEngine.UI;
 public class Timer1 : MonoBehaviour
 {
     // timer
-    public float timer = 30;
+    private float timer = 30;
     public Text timerTxt;
     private bool area = false;
-    public GameObject square;
 
-    public void OnTriggerEnter2D(Collider2D collision){
-        if (collision.gameObject == square){
+    public void OnCollisionEnter2D(Collision2D collision){
+        if (collision.gameObject.tag == "door1"){
             area = true;
-            Debug.Log("Entered Area");
+            Debug.Log("timer started");
         }
+
     }
 
     // Update is called once per frame
@@ -28,8 +29,12 @@ public class Timer1 : MonoBehaviour
     // timer that counts down once youve entered the outside area
     // if it hits 0 you die and the level resets
     public void startTimer(){
-        timer -= Time.fixedDeltaTime * 1;
-        timerTxt.text = (timer).ToString("0");
+        // decreases timer each second
+        timer -= (Time.deltaTime);
+        // displays timer to debug log
+        Debug.Log(timer);
+
+        // after 30 seconds timer explodes and you die
         if(timer < 0){
             Debug.Log("The Timer Exploded");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
