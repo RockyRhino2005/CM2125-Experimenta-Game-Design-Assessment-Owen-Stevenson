@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
+public class Timer1 : MonoBehaviour
 {
     // timer
     public float timer = 30;
