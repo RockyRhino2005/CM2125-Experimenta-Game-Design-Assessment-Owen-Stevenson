@@ -6,6 +6,8 @@ public class scoring : MonoBehaviour
 {
 
     private int score;
+
+    public GameObject Evolve_Token3;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,11 @@ public class scoring : MonoBehaviour
             Destroy(collision.gameObject);
             adjustScore(1);
         }
-
+        else if (collision.gameObject == Evolve_Token3){
+            Debug.Log("You Win");
+            Debug.Log("Score is " + score);
+            
+        }
     }
 
     public int getScore(){

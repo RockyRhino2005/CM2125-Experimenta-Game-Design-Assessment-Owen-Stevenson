@@ -9,20 +9,25 @@ public class Evolution : MonoBehaviour
 
     public GameObject Evolve_Token1;
     public GameObject Evolve_Token2;
+    public GameObject Evolve_Token3;
 
     public SpriteRenderer spriteRenderer;
     public Sprite newSprite;
     public Sprite newSprite2;
+    public Sprite newSprite3;
     private bool evo1;
     private bool evo2;
+    private bool evo3;
     public float lastAttack;
 
 
     // projectiles
     public GameObject projectile1;
     public GameObject projectile2;
+    public GameObject projectile3;
     public String firstAttack;
     private Rigidbody2D myRigid;
+    public ParticleSystem ps;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +35,7 @@ public class Evolution : MonoBehaviour
 
         // Get the Rigidbody component.
         myRigid = this.GetComponent<Rigidbody2D>(); 
-        
+        ps = GameObject.Find("confetti").GetComponent<ParticleSystem>();
     }
 
     // when the cat is interacts with evo token
@@ -39,19 +44,31 @@ public class Evolution : MonoBehaviour
     // it now displays a particle system that lasts 3 seconds
     public void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject == Evolve_Token1){
-            UnityEngine.Debug.Log("Evo Collided with");
+            Debug.Log("Evo Collided with");
             Destroy(collision.gameObject);
             // change sprite
             spriteRenderer.sprite = newSprite;
             evo1 = true;
+            evo2 = false;
+            evo3 = false;
         }
         else if (collision.gameObject == Evolve_Token2){
-            UnityEngine.Debug.Log("Evo Collided with");
+            Debug.Log("Evo Collided with");
             Destroy(collision.gameObject);
             // change sprite
             spriteRenderer.sprite = newSprite2;
             evo1 = false;
             evo2 = true;
+            evo3 = false;
+        }
+        else if (collision.gameObject == Evolve_Token3){
+            Destroy(collision.gameObject);
+            // change sprite
+            spriteRenderer.sprite = newSprite3;
+            evo1 = false;
+            evo2 = false;
+            evo3 = true;
+            Instantiate(ps,transform.position, transform.rotation);
         }
     }
 
@@ -74,6 +91,14 @@ public class Evolution : MonoBehaviour
                 if(Time.time > lastAttack + 1){
                     Debug.Log("shot");
                     Instantiate(projectile2, this.transform.position + this.transform.right, this.transform.rotation);
+                    lastAttack = Time.time;
+                }
+            }
+            // plasma
+            if(evo3 == true){
+                if(Time.time > lastAttack + 1){
+                    Debug.Log("Mind Attack");
+                    Instantiate(projectile3, this.transform.position + this.transform.right, this.transform.rotation);
                     lastAttack = Time.time;
                 }
             }
