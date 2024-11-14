@@ -88,7 +88,7 @@ public class CatMove : MonoBehaviour{
 
         // run right
         if (Input.GetKey(run) && Input.GetKey(right)) {
-            this.transform.Translate(new Vector3(15f, 0, 0)* Time.deltaTime * 1);
+            this.transform.Translate(new Vector3(18f, 0, 0)* Time.deltaTime * 1);
             if (isFacingRight == false){
                 this.transform.Rotate(new Vector3(0, 180, 0));
                 isFacingRight = true;

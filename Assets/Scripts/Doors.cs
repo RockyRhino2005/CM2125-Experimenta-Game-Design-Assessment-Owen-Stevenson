@@ -15,7 +15,7 @@ public class Doors : MonoBehaviour
     public float days;
 
     // timer
-    private float timer = 60;
+    private float timer = 100;
     private bool area = false;
 
     // day cycle
@@ -104,16 +104,17 @@ public class Doors : MonoBehaviour
             area = false;
             Debug.Log("You outran the clock");
 
+            // if day
             if (cycle == 2){
-                transform.position=new Vector3(transform.position.x,transform.position.y-280, transform.position.z);
+                transform.position=new Vector3(transform.position.x+5,transform.position.y-240, transform.position.z);
             }
-            // teleport to afternoon
+            // if afternoon
             if (cycle == 3){
-                transform.position=new Vector3(transform.position.x,transform.position.y-240, transform.position.z);
+                transform.position=new Vector3(transform.position.x+5,transform.position.y-190, transform.position.z);
             } 
-            // teleport to night
-            else if (cycle == 1) {
-                transform.position=new Vector3(transform.position.x,transform.position.y-200, transform.position.z);
+            // if night
+            if (cycle == 1) {
+                transform.position=new Vector3(transform.position.x+5,transform.position.y-140, transform.position.z);
             }
         }
 
