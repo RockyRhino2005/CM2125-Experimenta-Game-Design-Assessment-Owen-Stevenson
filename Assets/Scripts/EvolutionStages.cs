@@ -8,15 +8,22 @@ public class Evolution : MonoBehaviour
 {
 
     public GameObject Evolve_Token1;
-    private Rigidbody2D myRigid;
+    public GameObject Evolve_Token2;
 
     public SpriteRenderer spriteRenderer;
     public Sprite newSprite;
+    public Sprite newSprite2;
     private bool evo1;
+    private bool evo2;
     public float lastAttack;
-    public GameObject attack1;
 
+
+    // projectiles
+    public GameObject projectile1;
+    public GameObject projectile2;
     public String firstAttack;
+    private Rigidbody2D myRigid;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,19 +45,35 @@ public class Evolution : MonoBehaviour
             spriteRenderer.sprite = newSprite;
             evo1 = true;
         }
+        else if (collision.gameObject == Evolve_Token2){
+            UnityEngine.Debug.Log("Evo Collided with");
+            Destroy(collision.gameObject);
+            // change sprite
+            spriteRenderer.sprite = newSprite2;
+            evo1 = false;
+            evo2 = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         // when the player presses f it does an attack depending on which evo state it is in
-        GameObject tmpAttack;
         // evo1 attack
         if (Input.GetKey(firstAttack)) {
+            // ninja kick
             if(evo1 == true){
                 if(Time.time > lastAttack + 1){
                     Debug.Log("attack");
-                    tmpAttack = Instantiate(attack1, this.transform.position + (this.transform.right), this.transform.rotation);
+                    Instantiate(projectile1, transform.position, transform.rotation);
+                    lastAttack = Time.time;
+                }
+            }
+            // gun
+            if(evo2 == true){
+                if(Time.time > lastAttack + 1){
+                    Debug.Log("shot");
+                    Instantiate(projectile2, this.transform.position + this.transform.right, this.transform.rotation);
                     lastAttack = Time.time;
                 }
             }
