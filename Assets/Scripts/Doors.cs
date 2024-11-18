@@ -1,4 +1,5 @@
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -49,25 +50,27 @@ public class Doors : MonoBehaviour
         if (minutes >= 60){
             minutes = 0;
             hours += 1;
-            Debug.Log("Hour Passed");
+            // Debug.Log("Hour Passed");
         }
 
-        // changes background depending on after each 8 hours
+        // teleports player to afternoon
         if(hours == 5.0){
-            cycle = 2;
             hours += 1;
-            ChangeTime();
-        }
-
-        if(hours == 11.0){
-            cycle = 3;
-            hours += 1;
-            ChangeTime();
-        }
-
-        if(hours == 17.0){
             cycle = 1;
+            ChangeTime();
+        }
+
+        // teleports player to night
+        if(hours == 11.0){
             hours += 1;
+            cycle = 2;
+            ChangeTime();
+        }
+
+        // teleports player to day
+        if(hours == 17.0){
+            hours += 1;
+            cycle = 3;
             ChangeTime();
         }
 
@@ -103,17 +106,16 @@ public class Doors : MonoBehaviour
             startDay = false;
             area = false;
             Debug.Log("You outran the clock");
-            cycle = 2;
             // if day
-            if (cycle == 1){
+            if (cycle == 3){
                 transform.position=new Vector3(transform.position.x+5,transform.position.y-240, transform.position.z);
             }
             // if afternoon
-            if (cycle == 2){
+            if (cycle == 1){
                 transform.position=new Vector3(transform.position.x+5,transform.position.y-190, transform.position.z);
             } 
             // if night
-            if (cycle == 3) {
+            if (cycle == 2) {
                 transform.position=new Vector3(transform.position.x+5,transform.position.y-140, transform.position.z);
             }
         }
@@ -137,20 +139,16 @@ public class Doors : MonoBehaviour
 
     public void ChangeTime(){
         // teleport to day
-        if (cycle == 2){
-
+        if (cycle == 1){
             transform.position=new Vector3(transform.position.x,transform.position.y-40, transform.position.z);
-            cycle = 3;
         }
         // teleport to afternoon
-        if (cycle == 3){
+        if (cycle == 2){
             transform.position=new Vector3(transform.position.x,transform.position.y-40, transform.position.z);
-            cycle = 1;
         } 
         // teleport to night
-        else if (cycle == 1) {
+        else if (cycle == 3) {
             transform.position=new Vector3(transform.position.x,transform.position.y+100, transform.position.z);
-            cycle = 2;
         }
     }
 
