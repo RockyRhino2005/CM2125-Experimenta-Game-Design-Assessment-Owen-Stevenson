@@ -21,7 +21,7 @@ public class DogMove : MonoBehaviour
     {
 
         // makes enemy move back and forth between original place and original place + 40
-        transform.position =new Vector3(Mathf.PingPong(Time.time*2,max-min)+min, transform.position.y, transform.position.z);
+        transform.position =new Vector3(Mathf.PingPong(Time.time*8,max-min)+min, transform.position.y, transform.position.z);
 
         }
        

@@ -68,7 +68,6 @@ public class Evolution : MonoBehaviour
             evo1 = false;
             evo2 = false;
             evo3 = true;
-            Instantiate(ps,transform.position, transform.rotation);
         }
     }
 

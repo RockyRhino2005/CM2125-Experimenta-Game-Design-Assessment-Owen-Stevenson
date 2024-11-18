@@ -103,17 +103,17 @@ public class Doors : MonoBehaviour
             startDay = false;
             area = false;
             Debug.Log("You outran the clock");
-
+            cycle = 2;
             // if day
-            if (cycle == 2){
+            if (cycle == 1){
                 transform.position=new Vector3(transform.position.x+5,transform.position.y-240, transform.position.z);
             }
             // if afternoon
-            if (cycle == 3){
+            if (cycle == 2){
                 transform.position=new Vector3(transform.position.x+5,transform.position.y-190, transform.position.z);
             } 
             // if night
-            if (cycle == 1) {
+            if (cycle == 3) {
                 transform.position=new Vector3(transform.position.x+5,transform.position.y-140, transform.position.z);
             }
         }
@@ -140,14 +140,17 @@ public class Doors : MonoBehaviour
         if (cycle == 2){
 
             transform.position=new Vector3(transform.position.x,transform.position.y-40, transform.position.z);
+            cycle = 3;
         }
         // teleport to afternoon
         if (cycle == 3){
             transform.position=new Vector3(transform.position.x,transform.position.y-40, transform.position.z);
+            cycle = 1;
         } 
         // teleport to night
         else if (cycle == 1) {
             transform.position=new Vector3(transform.position.x,transform.position.y+100, transform.position.z);
+            cycle = 2;
         }
     }
 

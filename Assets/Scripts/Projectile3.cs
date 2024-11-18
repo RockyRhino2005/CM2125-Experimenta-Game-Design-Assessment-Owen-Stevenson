@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Projectile3 : MonoBehaviour
 {
 
@@ -7,11 +7,16 @@ public class Projectile3 : MonoBehaviour
     public float Life = 5f;
     private Rigidbody2D myRigid;
 
+    public ParticleSystem ps;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {  
 
         Destroy(this.gameObject, Life);
+        ps = GameObject.Find("confetti").GetComponent<ParticleSystem>();
         
     }
     void Update()
@@ -28,6 +33,9 @@ public class Projectile3 : MonoBehaviour
         if (collision.gameObject.tag =="wall" || collision.gameObject.tag =="enemy"){
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
+            Instantiate(ps,transform.position, transform.rotation);
+            Debug.Log("You Win");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
     }
