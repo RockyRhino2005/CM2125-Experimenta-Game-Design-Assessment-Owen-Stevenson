@@ -6,6 +6,8 @@ public class DogMove : MonoBehaviour
     public float min=2f;
 	public float max=3f;
 
+    private bool isFacingLeft = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +23,15 @@ public class DogMove : MonoBehaviour
     {
 
         // makes enemy move back and forth between original place and original place + 40
-        transform.position =new Vector3(Mathf.PingPong(Time.time*8,max-min)+min, transform.position.y, transform.position.z);
+        // when the enemy starts moving right his image flips and vice versa
+        float pinging = Mathf.PingPong(Time.time*8,max-min)+min;
+        transform.position =new Vector3(pinging, transform.position.y, transform.position.z);
 
+        if ((isFacingLeft == false && pinging > transform.position.x) || (isFacingLeft == true && pinging < transform.position.x)){
+            this.transform.Rotate(new Vector3(0, 180, 0));
         }
-       
     }
+
+       
+}
 
