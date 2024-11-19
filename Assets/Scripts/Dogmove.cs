@@ -5,8 +5,7 @@ public class DogMove : MonoBehaviour
     
     public float min=2f;
 	public float max=3f;
-
-    private bool isFacingLeft = false;
+    private bool isFacingRight = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +26,14 @@ public class DogMove : MonoBehaviour
         float pinging = Mathf.PingPong(Time.time*8,max-min)+min;
         transform.position =new Vector3(pinging, transform.position.y, transform.position.z);
 
-        if ((isFacingLeft == false && pinging > transform.position.x) || (isFacingLeft == true && pinging < transform.position.x)){
+        if (pinging >= max-2 && isFacingRight == true){
+            Debug.Log("Flip");
+            isFacingRight = false;
+            this.transform.Rotate(new Vector3(0, 180, 0));
+        }
+        else if (pinging <= min+2 && isFacingRight == false){
+            Debug.Log("Flip");
+            isFacingRight = true;
             this.transform.Rotate(new Vector3(0, 180, 0));
         }
     }
